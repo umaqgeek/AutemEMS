@@ -1,9 +1,9 @@
-#Installation
+# Installation
 
 `npm install`
 
-#Run
+# Run
 
-##Android
+## Android
 
 `npm run android`
