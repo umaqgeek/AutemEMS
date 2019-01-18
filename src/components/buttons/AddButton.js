@@ -14,6 +14,7 @@ const AddButton = (props) => {
       <Icon
         name="add"
         size={30}
+        color="white"
       />
     </TouchableOpacity>
   );
@@ -24,10 +25,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonContainer: {
-    width: 50,
-    height: 50,
+    width: 80,
+    height: 80,
     borderRadius: 50,
-    backgroundColor: 'rgba(0, 255, 0, 0.3)',
+    backgroundColor: 'green',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,

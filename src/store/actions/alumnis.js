@@ -2,7 +2,8 @@ import {
   ADD_ALUMNI,
   REMOVE_ALUMNI,
   UPDATE_ALUMNI,
-  REMOVE_ALL_ALUMNI
+  REMOVE_ALL_ALUMNI,
+  VIEW_ALUMNI
 } from './actionTypes';
 
 export const addAlumni = (alumni) => {
@@ -30,5 +31,11 @@ export const updateAlumni = (alumni) => {
 export const removeAllAlumni = () => {
   return {
     type: REMOVE_ALL_ALUMNI
+  };
+};
+
+export const viewAlumni = () => {
+  return {
+    type: VIEW_ALUMNI
   };
 };

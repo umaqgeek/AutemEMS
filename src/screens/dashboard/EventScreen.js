@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  ScrollView,
+  FlatList
 } from 'react-native';
 
 import AddButton from '../../components/buttons/AddButton';
+import ListOfBoxes from '../../components/lists/ListOfBoxes';
+
+import { connect } from 'react-redux';
+import {
+  viewEvent
+} from '../../store/actions/index';
 
 class EventScreen extends Component {
 
@@ -25,16 +33,23 @@ class EventScreen extends Component {
   }
 
   state = {
-    eventList: []
+    eventList: this.props.eventsData.eventData
   };
 
   render() {
     return (
       <View style={styles.container}>
+        <ScrollView style={styles.scrollView}>
+          <FlatList
+            data={this.state.eventList}
+            renderItem={({ item }) => (
+              <ListOfBoxes data={item} />
+            )}
+          />
+        </ScrollView>
         <View style={styles.addButton}>
           <AddButton />
         </View>
-        <Text>Event Screen</Text>
       </View>
     );
   }
@@ -42,8 +57,11 @@ class EventScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    height: "100%"
+    // flex: 1,
+    // height: "100%"
+  },
+  scrollView: {
+    zIndex: -20
   },
   addButton: {
     position: 'absolute',
@@ -53,4 +71,16 @@ const styles = StyleSheet.create({
   }
 });
 
-export default EventScreen;
+const mapStateToProps = (state) => {
+  return {
+    eventsData: state.eventData
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getViewEvents: () => dispatch(viewEvent())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventScreen);
