@@ -36,7 +36,7 @@ class AlumniScreen extends Component {
           <FlatList
             data={this.props.alumnis}
             renderItem={({ item }) => (
-              <Text>{JSON.stringify(item)}</Text>
+              <Text key={item.key}>{item.email} {item.phone} {"\n"}</Text>
             )}
           />
         </ScrollView>

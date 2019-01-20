@@ -27,7 +27,7 @@ export const formatTime = (time) => {
 };
 
 export const validation = (val, rules) => {
-  switch (rules.type) {
+  switch (rules) {
     case NOT_LEAVE_BLANK: {
       if (val === '') {
         return false

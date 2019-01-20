@@ -21,6 +21,7 @@ import {
 } from '../../store/actions/index';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import { validation, NOT_LEAVE_BLANK } from '../../Utilities/MyFunc';
 
 class LoginScreen extends Component {
 
@@ -50,9 +51,16 @@ class LoginScreen extends Component {
       phone: this.state.inputData.phone
     };
 
-    this.props.onAddAlumni(alumni);
-
-    Dashboard();
+    let isValid = true;
+    isValid = validation(this.state.inputData.email, NOT_LEAVE_BLANK);
+    isValid = validation(this.state.inputData.phone, NOT_LEAVE_BLANK);
+    if (isValid) {
+      this.props.onSetAuth(alumni);
+      this.props.onAddAlumni(alumni);
+      Dashboard();
+    } else {
+      alert('Do not leave blank!');
+    }
   };
 
   render() {
@@ -94,6 +102,22 @@ class LoginScreen extends Component {
       </ScrollView>
     );
   }
+};
+
+const mapStateToDispath = state => {
+  return {
+    currentAlumni: state.alumniData.currentAlumni,
+    alumnis: state.alumniData.alumnis
+  };
+};
+
+const mapPropsToDispatch = dispatch => {
+  return {
+    onSetAuth: (alumni) => dispatch(setCurrentAlumni(alumni)),
+    onGetAuth: (alumni) => dispatch(getCurrentAlumni(alumni)),
+    onGetAlumnis: () => dispatch(viewAlumni()),
+    onAddAlumni: (alumni) => dispatch(addAlumni(alumni))
+  };
 };
 
 const fontColor = '#000';
@@ -158,21 +182,5 @@ const styles = StyleSheet.create({
     height: 100
   }
 });
-
-const mapStateToDispath = state => {
-  return {
-    currentAlumni: state.alumniData.currentAlumni,
-    alumnis: state.alumniData.alumnis
-  };
-};
-
-const mapPropsToDispatch = dispatch => {
-  return {
-    onSetAuth: (alumni) => dispatch(setCurrentAlumni(alumni)),
-    onGetAuth: (alumni) => dispatch(getCurrentAlumni(alumni)),
-    onGetAlumnis: () => dispatch(viewAlumni()),
-    onAddAlumni: (alumni) => dispatch(addAlumni(alumni))
-  };
-};
 
 export default connect(mapStateToDispath, mapPropsToDispatch)(LoginScreen);

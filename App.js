@@ -16,11 +16,11 @@ import configureStore from './src/store/configureStore';
 const store = configureStore();
 
 Navigation.registerComponent("autemems.login.LoginScreen", () => LoginScreen, store, Provider);
-Navigation.registerComponent("autemems.sideDrawer.SideDrawer", () => SideDrawer);
+Navigation.registerComponent("autemems.sideDrawer.SideDrawer", () => SideDrawer, store, Provider);
 Navigation.registerComponent("autemems.dashboard.EventScreen", () => EventScreen, store, Provider);
 Navigation.registerComponent("autemems.eventScreens.addEventScreen", () => AddEventScreen, store, Provider);
-Navigation.registerComponent("autemems.dashboard.AlumniScreen", () => AlumniScreen);
-Navigation.registerComponent("autemems.dashboard.MeetingRoomScreen", () => MeetingRoomScreen);
+Navigation.registerComponent("autemems.dashboard.AlumniScreen", () => AlumniScreen, store, Provider);
+Navigation.registerComponent("autemems.dashboard.MeetingRoomScreen", () => MeetingRoomScreen, store, Provider);
 
 Promise.all([
   BackToLogin()

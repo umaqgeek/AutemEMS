@@ -67,9 +67,7 @@ class AddEventScreen extends Component {
       address: this.state.eventAddress,
       time: this.state.timePicked,
       date: this.state.datePicked,
-      createdBy: {
-        email: "user@gmail.com"
-      }
+      createdBy: this.props.currentAlumni
     };
 
     this.props.onAddEvent(eventData);
@@ -213,10 +211,16 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapStateToProps = (state) => {
+  return {
+    currentAlumni: state.alumniData.currentAlumni
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onAddEvent: (eventData) => dispatch(addEvent(eventData))
   };
 };
 
-export default connect(null, mapDispatchToProps)(AddEventScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(AddEventScreen);

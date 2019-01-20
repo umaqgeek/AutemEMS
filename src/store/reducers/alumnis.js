@@ -9,14 +9,7 @@ import {
 } from '../actions/actionTypes';
 
 const initialState = {
-  alumnis: [
-    {
-      key: "00001",
-      email: "umaqgeek@gmail.com",
-      phone: "0199737579",
-      fullname: "UMAR MUKHTAR B HAMBARAN"
-    }
-  ],
+  alumnis: [],
   currentAlumni: null
 };
 
@@ -27,7 +20,7 @@ const alumnisReducer = (state=initialState, action) => {
         ...state
       };
     case SET_CURR_ALUMNI:
-      let findAlumni = state.alumnis.find(alumni => {
+      var findAlumni = state.alumnis.find(alumni => {
         return alumni.email === action.alumni.email
       });
       return {
@@ -35,12 +28,12 @@ const alumnisReducer = (state=initialState, action) => {
         currentAlumni: (typeof findAlumni !== 'undefined') ? (findAlumni) : (action.alumni)
       };
     case ADD_ALUMNI:
-      let findAlumni = state.alumnis.find(alumni => {
+      var findAlumni = state.alumnis.find(alumni => {
         return alumni.email.toLowerCase() === action.alumni.email.toLowerCase()
       });
       let alumnis = state.alumnis;
       if (typeof findAlumni === 'undefined') {
-        alumnis.concat(action.alumni);
+        alumnis = alumnis.concat(action.alumni);
       }
       return {
         ...state,
