@@ -6,7 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "android": "react-native run-android",
-    "android-log": "react-native log-android"
+    "android-log": "react-native log-android",
+    "android-release": "react-native run-android --variant=release"
   },
   "dependencies": {
     "react": "16.6.3",

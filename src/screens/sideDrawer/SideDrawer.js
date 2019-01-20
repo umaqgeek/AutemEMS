@@ -18,7 +18,7 @@ class SideDrawer extends Component {
         <View>
           <Icon
             name="ios-contact"
-            size={150}
+            size={100}
           />
         </View>
         <View style={styles.hrLine}></View>
@@ -28,7 +28,7 @@ class SideDrawer extends Component {
         >
           <Icon
             name="md-log-out"
-            size={50}
+            size={30}
           />
           <Text style={styles.logoutText}>      Sign Out</Text>
         </TouchableOpacity>

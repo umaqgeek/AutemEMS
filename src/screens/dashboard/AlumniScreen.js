@@ -32,14 +32,7 @@ class AlumniScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.scrollView}>
-          <FlatList
-            data={this.props.alumnis}
-            renderItem={({ item }) => (
-              <Text key={item.key}>{item.email} {item.phone} {"\n"}</Text>
-            )}
-          />
-        </ScrollView>
+        <Text>Alumni Screen</Text>
       </View>
     );
   }
