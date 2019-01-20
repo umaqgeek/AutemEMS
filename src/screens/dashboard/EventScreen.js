@@ -32,10 +32,6 @@ class EventScreen extends Component {
     }
   }
 
-  state = {
-    eventList: this.props.eventsData.eventData
-  };
-
   addEventPopScreen = () => {
     this.props.navigator.push({
       screen: "autemems.eventScreens.addEventScreen",
@@ -50,7 +46,7 @@ class EventScreen extends Component {
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <FlatList
-            data={this.state.eventList}
+            data={this.props.eventsData.eventData}
             renderItem={({ item }) => (
               <EventBoxes data={item} />
             )}

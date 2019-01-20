@@ -12,6 +12,7 @@ import com.reactnativenavigation.NavigationApplication;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.imagepicker.ImagePickerPackage;
+import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
 
 import java.util.Arrays;
 import java.util.List;

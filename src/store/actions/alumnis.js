@@ -3,8 +3,24 @@ import {
   REMOVE_ALUMNI,
   UPDATE_ALUMNI,
   REMOVE_ALL_ALUMNI,
-  VIEW_ALUMNI
+  VIEW_ALUMNI,
+  SET_CURR_ALUMNI,
+  GET_CURR_ALUMNI
 } from './actionTypes';
+
+export const setCurrentAlumni = (alumni) => {
+  return {
+    type: SET_CURR_ALUMNI,
+    alumni: alumni
+  };
+};
+
+export const getCurrentAlumni = (alumni) => {
+  return {
+    type: GET_CURR_ALUMNI,
+    alumni: alumni
+  };
+};
 
 export const addAlumni = (alumni) => {
   return {

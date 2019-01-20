@@ -8,5 +8,7 @@ export {
   removeAlumni,
   updateAlumni,
   removeAllAlumni,
-  viewAlumni
+  viewAlumni,
+  setCurrentAlumni,
+  getCurrentAlumni
 } from './alumnis';

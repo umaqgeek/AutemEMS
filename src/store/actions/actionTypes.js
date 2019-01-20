@@ -9,3 +9,5 @@ export const REMOVE_ALUMNI = 'REMOVE_ALUMNI';
 export const UPDATE_ALUMNI = 'UPDATE_ALUMNI';
 export const REMOVE_ALL_ALUMNI = 'REMOVE_ALL_ALUMNI';
 export const VIEW_ALUMNI = 'VIEW_ALUMNI';
+export const SET_CURR_ALUMNI = 'SET_CURR_ALUMNI';
+export const GET_CURR_ALUMNI = 'GET_CURR_ALUMNI';

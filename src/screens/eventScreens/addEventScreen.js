@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import { addEvent } from '../../store/actions/index';
 
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import { formatDate, formatTime } from '../../Utilities/MyFunc';
 
 class AddEventScreen extends Component {
 
@@ -22,26 +23,6 @@ class AddEventScreen extends Component {
     isTimePickerVisible: false,
     datePicked: '',
     timePicked: ''
-  };
-
-  formatDate = (date) => {
-    var monthNames = [
-      "JAN", "FEB", "MAC",
-      "APR", "MAY", "JUN", "JUL",
-      "AUG", "SEP", "OCT",
-      "NOV", "DEC"
-    ];
-    var day = date.getDate();
-    var monthIndex = date.getMonth();
-    var year = date.getFullYear();addEvent
-    return day + ' ' + monthNames[monthIndex] + ' ' + year;
-  };
-
-  formatTime = (time) => {
-    var times = time.split(":");
-    var hour = times[0] > 12 ? ((times[0]-12) < 10 ? "0"+(times[0]-12) : (times[0]-12)) : times[0];
-    var type = times[0] > 12 ? 'PM' : 'AM';
-    return hour + ':' + times[1] + ' ' + type;
   };
 
   _showDateTimePicker = (key) => {
@@ -59,10 +40,10 @@ class AddEventScreen extends Component {
     let valTemp = val;
     if (key === 'datePicked') {
       // val = valTemp.toLocaleDateString();
-      val = this.formatDate(valTemp);
+      val = formatDate(valTemp);
     } else {
       // val = valTemp.toLocaleTimeString();
-      val = this.formatTime(valTemp.toLocaleTimeString().toString());
+      val = formatTime(valTemp.toLocaleTimeString().toString());
     }
     this.setState({
       [key]: val
@@ -90,6 +71,7 @@ class AddEventScreen extends Component {
         email: "user@gmail.com"
       }
     };
+
     this.props.onAddEvent(eventData);
     this.props.navigator.pop();
   };

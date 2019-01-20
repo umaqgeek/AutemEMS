@@ -12,6 +12,14 @@ import {
 import ImageBack from '../../assets/images/Logo-AUTeM-Alumni-UTeM.png';
 import Dashboard from '../mainTabs/dashboard';
 
+import { connect } from 'react-redux';
+import {
+  setCurrentAlumni,
+  getCurrentAlumni,
+  viewAlumni,
+  addAlumni
+} from '../../store/actions/index';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 
 class LoginScreen extends Component {
@@ -35,6 +43,14 @@ class LoginScreen extends Component {
   };
 
   loginHandler = () => {
+
+    const alumni = {
+      key: Math.random(),
+      email: this.state.inputData.email,
+      phone: this.state.inputData.phone
+    };
+
+    this.props.onAddAlumni(alumni);
 
     Dashboard();
   };
@@ -143,4 +159,20 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LoginScreen;
+const mapStateToDispath = state => {
+  return {
+    currentAlumni: state.alumniData.currentAlumni,
+    alumnis: state.alumniData.alumnis
+  };
+};
+
+const mapPropsToDispatch = dispatch => {
+  return {
+    onSetAuth: (alumni) => dispatch(setCurrentAlumni(alumni)),
+    onGetAuth: (alumni) => dispatch(getCurrentAlumni(alumni)),
+    onGetAlumnis: () => dispatch(viewAlumni()),
+    onAddAlumni: (alumni) => dispatch(addAlumni(alumni))
+  };
+};
+
+export default connect(mapStateToDispath, mapPropsToDispatch)(LoginScreen);

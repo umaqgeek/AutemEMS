@@ -3,7 +3,14 @@ import {
   View,
   Text,
   StyleSheet,
+  ScrollView,
+  FlatList
 } from 'react-native';
+
+import { connect } from 'react-redux';
+import {
+  updateAlumni
+} from '../../store/actions/index';
 
 class AlumniScreen extends Component {
 
@@ -25,7 +32,14 @@ class AlumniScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Alumni Screen</Text>
+        <ScrollView style={styles.scrollView}>
+          <FlatList
+            data={this.props.alumnis}
+            renderItem={({ item }) => (
+              <Text>{JSON.stringify(item)}</Text>
+            )}
+          />
+        </ScrollView>
       </View>
     );
   }
@@ -35,6 +49,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  scrollView: {
+    zIndex: -20
+  }
 });
 
-export default AlumniScreen;
+const mapStateToProps = (state) => {
+  return {
+    alumnis: state.alumniData.alumnis
+  };
+};
+
+export default connect(mapStateToProps)(AlumniScreen);

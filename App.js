@@ -15,7 +15,7 @@ import {
 import configureStore from './src/store/configureStore';
 const store = configureStore();
 
-Navigation.registerComponent("autemems.login.LoginScreen", () => LoginScreen);
+Navigation.registerComponent("autemems.login.LoginScreen", () => LoginScreen, store, Provider);
 Navigation.registerComponent("autemems.sideDrawer.SideDrawer", () => SideDrawer);
 Navigation.registerComponent("autemems.dashboard.EventScreen", () => EventScreen, store, Provider);
 Navigation.registerComponent("autemems.eventScreens.addEventScreen", () => AddEventScreen, store, Provider);
