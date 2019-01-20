@@ -21,7 +21,8 @@ const ListOfBoxes = (props) => (
       <Text style={styles.textAddress}>{props.data.address}</Text>
       <View style={styles.datetime}>
         <Text style={styles.textDate}>{props.data.date}, </Text>
-        <Text style={styles.textTime}>{props.data.time}</Text>
+        <Text style={styles.textTime}>{props.data.time}, </Text>
+        <Text style={styles.textTime}>Created by {props.data.createdBy.email}</Text>
       </View>
     </View>
   </TouchableOpacity>

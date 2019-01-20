@@ -1,4 +1,5 @@
 export {
+  addEvent,
   viewEvent
 } from './events';
 

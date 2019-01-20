@@ -6,8 +6,9 @@ import BackToLogin from './src/screens/mainTabs/backToLogin';
 import {
   LoginScreen,
   SideDrawer,
-  AlumniScreen,
   EventScreen,
+  AddEventScreen,
+  AlumniScreen,
   MeetingRoomScreen
 } from './src/screens/index';
 
@@ -16,8 +17,9 @@ const store = configureStore();
 
 Navigation.registerComponent("autemems.login.LoginScreen", () => LoginScreen);
 Navigation.registerComponent("autemems.sideDrawer.SideDrawer", () => SideDrawer);
-Navigation.registerComponent("autemems.dashboard.AlumniScreen", () => AlumniScreen);
 Navigation.registerComponent("autemems.dashboard.EventScreen", () => EventScreen, store, Provider);
+Navigation.registerComponent("autemems.eventScreens.addEventScreen", () => AddEventScreen, store, Provider);
+Navigation.registerComponent("autemems.dashboard.AlumniScreen", () => AlumniScreen);
 Navigation.registerComponent("autemems.dashboard.MeetingRoomScreen", () => MeetingRoomScreen);
 
 Promise.all([

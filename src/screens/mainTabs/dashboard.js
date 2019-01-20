@@ -15,7 +15,7 @@ const dashboard = () => {
         {
           screen: "autemems.dashboard.EventScreen",
           label: "Event",
-          title: "Event",
+          title: "Event List",
           icon: sources[0],
           navigatorButtons: {
             leftButtons: [
@@ -30,7 +30,7 @@ const dashboard = () => {
         {
           screen: "autemems.dashboard.MeetingRoomScreen",
           label: "Meeting Room",
-          title: "Meeting Room",
+          title: "Meeting Room List",
           icon: sources[1],
           navigatorButtons: {
             leftButtons: [
@@ -45,7 +45,7 @@ const dashboard = () => {
         {
           screen: "autemems.dashboard.AlumniScreen",
           label: "Alumni",
-          title: "Alumni",
+          title: "Alumni List",
           icon: sources[2],
           navigatorButtons: {
             leftButtons: [

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import AddButton from '../../components/buttons/AddButton';
-import ListOfBoxes from '../../components/lists/ListOfBoxes';
+import EventBoxes from '../../components/lists/EventBoxes';
 
 import { connect } from 'react-redux';
 import {
@@ -36,6 +36,15 @@ class EventScreen extends Component {
     eventList: this.props.eventsData.eventData
   };
 
+  addEventPopScreen = () => {
+    this.props.navigator.push({
+      screen: "autemems.eventScreens.addEventScreen",
+      title: "Add Event",
+      animated: true,
+      animationType: 'fade'
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -43,12 +52,12 @@ class EventScreen extends Component {
           <FlatList
             data={this.state.eventList}
             renderItem={({ item }) => (
-              <ListOfBoxes data={item} />
+              <EventBoxes data={item} />
             )}
           />
         </ScrollView>
         <View style={styles.addButton}>
-          <AddButton />
+          <AddButton onAddEventPopScreen={this.addEventPopScreen} />
         </View>
       </View>
     );

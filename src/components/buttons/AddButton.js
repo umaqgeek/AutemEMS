@@ -10,7 +10,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const AddButton = (props) => {
   return (
-    <TouchableOpacity style={[styles.buttonContainer, props.style]}>
+    <TouchableOpacity
+      style={[styles.buttonContainer, props.style]}
+      onPress={props.onAddEventPopScreen}
+    >
       <Icon
         name="add"
         size={30}
