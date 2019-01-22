@@ -1,4 +1,5 @@
 export {
+  selectedEvent,
   addEvent,
   viewEvent
 } from './events';

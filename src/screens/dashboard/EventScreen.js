@@ -9,9 +9,11 @@ import {
 
 import AddButton from '../../components/buttons/AddButton';
 import EventBoxes from '../../components/lists/EventBoxes';
+import ModalDetailEvent from '../../components/modals/ModalDetailEvent';
 
 import { connect } from 'react-redux';
 import {
+  selectedEvent,
   viewEvent
 } from '../../store/actions/index';
 
@@ -32,6 +34,16 @@ class EventScreen extends Component {
     }
   }
 
+  state = {
+    localChoosedEvent: null
+  };
+
+  setModalVisible(visibleData) {
+    this.setState({
+      localChoosedEvent: visibleData
+    });
+  }
+
   addEventPopScreen = () => {
     this.props.navigator.push({
       screen: "autemems.eventScreens.addEventScreen",
@@ -41,14 +53,32 @@ class EventScreen extends Component {
     });
   };
 
+  onViewDetail = (key) => {
+    let eventData = this.props.eventsData.eventData.find((ed) => {
+      return ed.key === key
+    });
+    this.props.setSelectedEvent(eventData);
+
+    this.setModalVisible(eventData);
+  };
+
   render() {
     return (
       <View style={styles.container}>
+
+        <ModalDetailEvent
+          visible={this.state.localChoosedEvent !== null}
+          modalData={this.state.localChoosedEvent}
+          onModalClose={() => {
+            this.setModalVisible(null);
+          }}
+        />
+
         <ScrollView style={styles.scrollView}>
           <FlatList
             data={this.props.eventsData.eventData}
             renderItem={({ item }) => (
-              <EventBoxes data={item} />
+              <EventBoxes data={item} onDetail={() => this.onViewDetail(item.key)} />
             )}
           />
         </ScrollView>
@@ -78,13 +108,15 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    eventsData: state.eventData
+    eventsData: state.eventData,
+    choosedEvent: state.eventData.choosedEvent
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getViewEvents: () => dispatch(viewEvent())
+    getViewEvents: () => dispatch(viewEvent()),
+    setSelectedEvent: (eventSelected) => dispatch(selectedEvent(eventSelected))
   };
 };
 

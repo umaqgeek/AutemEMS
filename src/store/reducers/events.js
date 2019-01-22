@@ -1,4 +1,5 @@
 import {
+  SELECTED_EVENT,
   ADD_EVENT,
   // REMOVE_EVENT,
   // UPDATE_EVENT,
@@ -38,11 +39,17 @@ const initialState = {
         email: "umar@gmail.com"
       }
     }
-  ]
+  ],
+  choosedEvent: null
 };
 
 const eventsReducer = (state=initialState, action) => {
   switch (action.type) {
+    case SELECTED_EVENT:
+      return {
+        ...state,
+        choosedEvent: action.eventData
+      };
     case ADD_EVENT:
       return {
         ...state,

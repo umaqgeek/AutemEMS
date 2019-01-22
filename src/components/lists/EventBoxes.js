@@ -9,7 +9,10 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const ListOfBoxes = (props) => (
-  <TouchableOpacity style={styles.container} key={props.data.key}>
+  <TouchableOpacity
+    style={styles.container}
+    key={props.data.key}
+    onPress={props.onDetail}>
     <View style={styles.eventIconLeft}>
       <Icon
         name="event-note"
