@@ -1,9 +1,9 @@
-# Installation
+# Alumni UTeM Event Management System
+
+## Installation
 
 `npm install`
 
-# Run
-
-## Android
+## Run (Android)
 
 `npm run android`
