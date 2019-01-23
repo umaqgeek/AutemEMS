@@ -8,6 +8,11 @@ import {
   GET_CURR_ALUMNI
 } from './actionTypes';
 
+import {
+  uiStartLoading,
+  uiStopLoading
+} from './index';
+
 export const setCurrentAlumni = (alumni) => {
   return {
     type: SET_CURR_ALUMNI,
@@ -28,14 +33,19 @@ export const addAlumni = (alumni) => {
   //   alumni: alumni
   // };
   return dispatch => {
+    dispatch(uiStartLoading());
     fetch("https://umar-react-nativ-1547611996954.firebaseio.com/alumnis.json", {
       method: "POST",
       body: JSON.stringify(alumni)
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err);
+      dispatch(uiStopLoading());
+    })
     .then(res => res.json())
     .then(parsedRes => {
       console.log(parsedRes);
+      dispatch(uiStopLoading());
     });
   };
 };

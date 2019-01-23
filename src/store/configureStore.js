@@ -8,10 +8,12 @@ import Thunker from 'redux-thunk';
 
 import eventsReducer from './reducers/events';
 import alumnisReducer from './reducers/alumnis';
+import uiReducer from './reducers/ui';
 
 const rootReducer = combineReducers({
   eventData: eventsReducer,
-  alumniData: alumnisReducer
+  alumniData: alumnisReducer,
+  uiData: uiReducer
 });
 
 let composeEnhancers = compose;

@@ -13,3 +13,8 @@ export {
   setCurrentAlumni,
   getCurrentAlumni
 } from './alumnis';
+
+export {
+  uiStartLoading,
+  uiStopLoading
+} from './ui';

@@ -57,7 +57,11 @@ class LoginScreen extends Component {
     if (isValid) {
       this.props.onSetAuth(alumni);
       this.props.onAddAlumni(alumni);
-      Dashboard();
+
+      if (this.props.isLoading) {
+        Dashboard();
+      }
+
     } else {
       alert('Do not leave blank!');
     }
@@ -107,7 +111,8 @@ class LoginScreen extends Component {
 const mapStateToDispath = state => {
   return {
     currentAlumni: state.alumniData.currentAlumni,
-    alumnis: state.alumniData.alumnis
+    alumnis: state.alumniData.alumnis,
+    isLoading: state.uiData.isLoading
   };
 };
 
