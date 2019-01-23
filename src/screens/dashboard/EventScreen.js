@@ -65,15 +65,6 @@ class EventScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-
-        <ModalDetailEvent
-          visible={this.state.localChoosedEvent !== null}
-          modalData={this.state.localChoosedEvent}
-          onModalClose={() => {
-            this.setModalVisible(null);
-          }}
-        />
-
         <ScrollView style={styles.scrollView}>
           <FlatList
             data={this.props.eventsData.eventData}
@@ -85,6 +76,13 @@ class EventScreen extends Component {
         <View style={styles.addButton}>
           <AddButton onAddEventPopScreen={this.addEventPopScreen} />
         </View>
+        <ModalDetailEvent
+          visible={this.state.localChoosedEvent !== null}
+          modalData={this.state.localChoosedEvent}
+          onModalClose={() => {
+            this.setModalVisible(null);
+          }}
+        />
       </View>
     );
   }

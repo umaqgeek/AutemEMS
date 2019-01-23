@@ -23,9 +23,20 @@ export const getCurrentAlumni = (alumni) => {
 };
 
 export const addAlumni = (alumni) => {
-  return {
-    type: ADD_ALUMNI,
-    alumni: alumni
+  // return {
+  //   type: ADD_ALUMNI,
+  //   alumni: alumni
+  // };
+  return dispatch => {
+    fetch("https://umar-react-nativ-1547611996954.firebaseio.com/alumnis.json", {
+      method: "POST",
+      body: JSON.stringify(alumni)
+    })
+    .catch(err => console.log(err))
+    .then(res => res.json())
+    .then(parsedRes => {
+      console.log(parsedRes);
+    });
   };
 };
 
