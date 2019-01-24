@@ -14,7 +14,7 @@ import ModalDetailEvent from '../../components/modals/ModalDetailEvent';
 import { connect } from 'react-redux';
 import {
   selectedEvent,
-  viewEvent
+  getEvent
 } from '../../store/actions/index';
 
 class EventScreen extends Component {
@@ -32,6 +32,10 @@ class EventScreen extends Component {
         });
       }
     }
+  }
+
+  componentDidMount() {
+    this.props.getViewEvents();
   }
 
   state = {
@@ -113,7 +117,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getViewEvents: () => dispatch(viewEvent()),
+    getViewEvents: () => dispatch(getEvent()),
     setSelectedEvent: (eventSelected) => dispatch(selectedEvent(eventSelected))
   };
 };

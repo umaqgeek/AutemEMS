@@ -9,12 +9,16 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-import { addEvent } from '../../store/actions/index';
+import { addEvent, getEvent } from '../../store/actions/index';
 
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { formatDate, formatTime, validation, NOT_LEAVE_BLANK } from '../../Utilities/MyFunc';
 
 class AddEventScreen extends Component {
+
+  componentDidMount() {
+    this.props.getViewEvents();
+  }
 
   state = {
     eventName: '',
@@ -76,6 +80,7 @@ class AddEventScreen extends Component {
 
     if (isValid) {
       this.props.onAddEvent(eventData);
+      this.props.getViewEvents();
       this.props.navigator.pop();
     } else {
       alert('Do not leave blank!');
@@ -227,7 +232,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddEvent: (eventData) => dispatch(addEvent(eventData))
+    onAddEvent: (eventData) => dispatch(addEvent(eventData)),
+    getViewEvents: () => dispatch(getEvent())
   };
 };
 

@@ -54,7 +54,7 @@ export const addAlumni = (alumni) => {
           body: JSON.stringify(alumni)
         })
         .catch(err => {
-          console.log(err);
+          console.log('addAlumni: ' + err);
           dispatch(uiStopLoading());
         })
         .then(res => res.json())
@@ -65,7 +65,7 @@ export const addAlumni = (alumni) => {
       dispatch(uiStopLoading());
     })
     .catch(err => {
-      console.log(err);
+      console.log('addAlumni: ' + err);
       dispatch(uiStopLoading());
     });
   };

@@ -37,7 +37,8 @@ const eventsReducer = (state=initialState, action) => {
       };
     case VIEW_EVENT:
       return {
-        ...state
+        ...state,
+        eventData: action.eventData
       };
     default:
       return state;
