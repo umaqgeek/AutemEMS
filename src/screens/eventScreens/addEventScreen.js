@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { addEvent } from '../../store/actions/index';
 
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import { formatDate, formatTime } from '../../Utilities/MyFunc';
+import { formatDate, formatTime, validation, NOT_LEAVE_BLANK } from '../../Utilities/MyFunc';
 
 class AddEventScreen extends Component {
 
@@ -26,7 +26,6 @@ class AddEventScreen extends Component {
   };
 
   _showDateTimePicker = (key) => {
-    console.log(this.state);
     this.setState({
       [key]: true
     });
@@ -70,8 +69,17 @@ class AddEventScreen extends Component {
       createdBy: this.props.currentAlumni
     };
 
-    this.props.onAddEvent(eventData);
-    this.props.navigator.pop();
+    let isValid = true;
+    for (let key in eventData) {
+      isValid = validation(eventData[key], NOT_LEAVE_BLANK) && isValid;
+    }
+
+    if (isValid) {
+      this.props.onAddEvent(eventData);
+      this.props.navigator.pop();
+    } else {
+      alert('Do not leave blank!');
+    }
   };
 
   onCloseModal = () => {

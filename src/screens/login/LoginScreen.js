@@ -52,15 +52,17 @@ class LoginScreen extends Component {
     };
 
     let isValid = true;
-    isValid = validation(this.state.inputData.email, NOT_LEAVE_BLANK);
-    isValid = validation(this.state.inputData.phone, NOT_LEAVE_BLANK);
+    for (let key in alumni) {
+      isValid = validation(alumni[key], NOT_LEAVE_BLANK) && isValid;
+    }
+
     if (isValid) {
       this.props.onSetAuth(alumni);
       this.props.onAddAlumni(alumni);
 
-      if (this.props.isLoading) {
+      // if (this.props.isLoading) {
         Dashboard();
-      }
+      // }
 
     } else {
       alert('Do not leave blank!');

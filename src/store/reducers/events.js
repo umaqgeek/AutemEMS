@@ -9,36 +9,16 @@ import {
 
 const initialState = {
   eventData: [
-    {
-      key: "01",
-      name: "Perjumpaan AGM Tahunan",
-      address: "Tingkat 2, Hotel MITC, 75450, Ayer Keroh, Melaka.",
-      time: "02:00 PM",
-      date: "14 DEC 2018",
-      createdBy: {
-        email: "umar@gmail.com"
-      }
-    },
-    {
-      key: "02",
-      name: "Majlis Makan-Makan dengan Ahli Kelab",
-      address: "Tingkat 1, Hotel Muzadfar, 75450, Ayer Keroh, Melaka.",
-      time: "08:00 PM",
-      date: "21 JAN 2019",
-      createdBy: {
-        email: "umar@gmail.com"
-      }
-    },
-    {
-      key: "03",
-      name: "BBQ Makan-Makan Pantai Klebang",
-      address: "Pantai Klebang, Melaka",
-      time: "05:30 PM",
-      date: "04 APR 2019",
-      createdBy: {
-        email: "umar@gmail.com"
-      }
-    }
+    // {
+    //   key: "01",
+    //   name: "Perjumpaan AGM Tahunan",
+    //   address: "Tingkat 2, Hotel MITC, 75450, Ayer Keroh, Melaka.",
+    //   time: "02:00 PM",
+    //   date: "14 DEC 2018",
+    //   createdBy: {
+    //     email: "umar@gmail.com"
+    //   }
+    // },
   ],
   choosedEvent: null
 };

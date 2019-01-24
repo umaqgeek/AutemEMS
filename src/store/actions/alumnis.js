@@ -1,5 +1,5 @@
 import {
-  ADD_ALUMNI,
+  // ADD_ALUMNI,
   REMOVE_ALUMNI,
   UPDATE_ALUMNI,
   REMOVE_ALL_ALUMNI,
@@ -9,6 +9,7 @@ import {
 } from './actionTypes';
 
 import {
+  BASE_URL,
   uiStartLoading,
   uiStopLoading
 } from './index';
@@ -34,17 +35,37 @@ export const addAlumni = (alumni) => {
   // };
   return dispatch => {
     dispatch(uiStartLoading());
-    fetch("https://umar-react-nativ-1547611996954.firebaseio.com/alumnis.json", {
-      method: "POST",
-      body: JSON.stringify(alumni)
+    fetch(BASE_URL + "/alumnis.json")
+    .then(res => res.json())
+    .then(parsedRes => {
+      const alumnis = [];
+      for (let key in parsedRes) {
+        alumnis.push({
+          ...parsedRes[key],
+          id: key
+        });
+      }
+      let findAlumni = alumnis.find(al => {
+        return al.email.toLowerCase() === alumni.email.toLowerCase()
+      });
+      if (typeof findAlumni === 'undefined') {
+        fetch(BASE_URL + "/alumnis.json", {
+          method: "POST",
+          body: JSON.stringify(alumni)
+        })
+        .catch(err => {
+          console.log(err);
+          dispatch(uiStopLoading());
+        })
+        .then(res => res.json())
+        .then(parsedRes => {
+          console.log(parsedRes);
+        });
+      }
+      dispatch(uiStopLoading());
     })
     .catch(err => {
       console.log(err);
-      dispatch(uiStopLoading());
-    })
-    .then(res => res.json())
-    .then(parsedRes => {
-      console.log(parsedRes);
       dispatch(uiStopLoading());
     });
   };
