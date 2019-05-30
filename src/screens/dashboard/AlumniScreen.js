@@ -32,7 +32,7 @@ class AlumniScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Alumni Screen</Text>
+        <Text>To be developed ...</Text>
       </View>
     );
   }

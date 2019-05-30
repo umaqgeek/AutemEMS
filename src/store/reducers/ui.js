@@ -10,16 +10,17 @@ const initialState = {
 const uiReducer = (state=initialState, action) => {
   switch (action.type) {
     case UI_START_LOADING:
+      console.log('true UI');
       return {
-        ...state,
         isLoading: true
       };
     case UI_STOP_LOADING:
+      console.log('false UI');
       return {
-        ...state,
         isLoading: false
       };
     default:
+      console.log('default UI');
       return state;
   }
 };

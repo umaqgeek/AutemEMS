@@ -25,7 +25,7 @@ class MeetingRoomScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Meeting Room Screen</Text>
+        <Text>To be developed ...</Text>
       </View>
     );
   }

@@ -9,7 +9,7 @@ import {
 
 import AddButton from '../../components/buttons/AddButton';
 import EventBoxes from '../../components/lists/EventBoxes';
-import ModalDetailEvent from '../../components/modals/ModalDetailEvent';
+import ModalDetailEvent from '../modals/ModalDetailEvent';
 
 import { connect } from 'react-redux';
 import {
@@ -34,7 +34,7 @@ class EventScreen extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.getViewEvents();
   }
 
@@ -61,9 +61,14 @@ class EventScreen extends Component {
     let eventData = this.props.eventsData.eventData.find((ed) => {
       return ed.key === key
     });
+    eventData.key = key;
     this.props.setSelectedEvent(eventData);
 
     this.setModalVisible(eventData);
+  };
+
+  onRemoveEvent = (uuid) => {
+    alert(JSON.stringify(uuid));
   };
 
   render() {
@@ -85,7 +90,8 @@ class EventScreen extends Component {
           modalData={this.state.localChoosedEvent}
           onModalClose={() => {
             this.setModalVisible(null);
-          }}
+          }} 
+          onDeleteEvent={this.onRemoveEvent}
         />
       </View>
     );

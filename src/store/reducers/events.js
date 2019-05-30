@@ -1,7 +1,7 @@
 import {
   SELECTED_EVENT,
   ADD_EVENT,
-  // REMOVE_EVENT,
+  REMOVE_EVENT,
   // UPDATE_EVENT,
   // REMOVE_ALL_EVENT,
   VIEW_EVENT
@@ -10,6 +10,7 @@ import {
 const initialState = {
   eventData: [
     // {
+    //   uuid: "<firebase id>",
     //   key: "01",
     //   name: "Perjumpaan AGM Tahunan",
     //   address: "Tingkat 2, Hotel MITC, 75450, Ayer Keroh, Melaka.",
@@ -34,6 +35,14 @@ const eventsReducer = (state=initialState, action) => {
       return {
         ...state,
         eventData: state.eventData.concat(action.eventData)
+      };
+    case REMOVE_EVENT:
+      var pos = state.eventData.map((e) => { 
+        return e.key; 
+      }).indexOf(action.eventKey);
+      return {
+        ...state,
+        eventData: state.eventData.splice(pos, 1)
       };
     case VIEW_EVENT:
       return {

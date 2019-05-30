@@ -16,7 +16,7 @@ import { formatDate, formatTime, validation, NOT_LEAVE_BLANK } from '../../Utili
 
 class AddEventScreen extends Component {
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.getViewEvents();
   }
 
@@ -65,7 +65,7 @@ class AddEventScreen extends Component {
 
   addEventHandler = () => {
     const eventData = {
-      key: new Date().getUTCMilliseconds().toString(),
+      key: new Date().getTime().toString(),
       name: this.state.eventName,
       address: this.state.eventAddress,
       time: this.state.timePicked,

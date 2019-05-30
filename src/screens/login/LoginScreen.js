@@ -46,7 +46,7 @@ class LoginScreen extends Component {
   loginHandler = () => {
 
     const alumni = {
-      key: Math.random(),
+      name: this.state.inputData.email,
       email: this.state.inputData.email,
       phone: this.state.inputData.phone
     };
@@ -57,12 +57,13 @@ class LoginScreen extends Component {
     }
 
     if (isValid) {
+
       this.props.onSetAuth(alumni);
       this.props.onAddAlumni(alumni);
 
-      // if (this.props.isLoading) {
+      if (!this.props.isLoading) {
         Dashboard();
-      // }
+      }
 
     } else {
       alert('Do not leave blank!');
@@ -103,6 +104,13 @@ class LoginScreen extends Component {
             >
               <Text style={styles.buttonTextInput}>Log In</Text>
             </TouchableOpacity>
+
+            <View style={styles.footerContainer}>
+              <Text style={styles.footerText}>Developed by Umar Mukhtar</Text>
+              <Text style={styles.footerText}>version 1.0.3</Text>
+              <Text style={styles.footerText}>umaqgeek@gmail.com</Text>
+            </View>
+
           </View>
         </View>
       </ScrollView>
@@ -187,6 +195,16 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     width: "100%",
     height: 100
+  },
+  footerContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '10%'
+  },
+  footerText: {
+    fontSize: 10,
+    fontStyle: 'italic'
   }
 });
 

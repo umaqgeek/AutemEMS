@@ -14,6 +14,8 @@ import {
   uiStopLoading
 } from './index';
 
+import { fetcher } from '../models';
+
 export const setCurrentAlumni = (alumni) => {
   return {
     type: SET_CURR_ALUMNI,
@@ -33,41 +35,78 @@ export const addAlumni = (alumni) => {
   //   type: ADD_ALUMNI,
   //   alumni: alumni
   // };
+
   return dispatch => {
+
     dispatch(uiStartLoading());
-    fetch(BASE_URL + "/alumnis.json")
-    .then(res => res.json())
-    .then(parsedRes => {
-      const alumnis = [];
-      for (let key in parsedRes) {
-        alumnis.push({
-          ...parsedRes[key],
-          id: key
-        });
+    fetcher('alumnis.json', 'GET').then(alumnisGlobal => {
+      
+      var alumnis = [];
+      if (alumnisGlobal) {
+        for (var key in alumnisGlobal) {
+          alumnis.push(alumnisGlobal[key]);
+        }
       }
-      let findAlumni = alumnis.find(al => {
-        return al.email.toLowerCase() === alumni.email.toLowerCase()
+
+      var findAlumni = alumnis.find(al => {
+        if (al.email) {
+          return al.email.toLowerCase() === alumni.email.toLowerCase()
+        }
+        return;
       });
       if (typeof findAlumni === 'undefined') {
-        fetch(BASE_URL + "/alumnis.json", {
-          method: "POST",
-          body: JSON.stringify(alumni)
-        })
-        .catch(err => {
-          console.log('addAlumni: ' + err);
-          dispatch(uiStopLoading());
-        })
-        .then(res => res.json())
-        .then(parsedRes => {
-          console.log(parsedRes);
+        fetcher('alumnis.json', 'POST', alumni).then(al => {
+          console.log('Alumni: ' + JSON.stringify(al));
+        });
+      } else {
+
+        if (alumnisGlobal) {
+          for (var key in alumnisGlobal) {
+            if (alumnisGlobal[key].email.toLowerCase() === alumni.email.toLowerCase()) {
+              alumnisGlobal[key].phone = alumni.phone;
+            }
+          }
+        }
+        fetcher('alumnis.json', 'PUT', alumnisGlobal).then(al => {
+          console.log('Alumni: ' + JSON.stringify(al));
         });
       }
-      dispatch(uiStopLoading());
-    })
-    .catch(err => {
-      console.log('addAlumni: ' + err);
-      dispatch(uiStopLoading());
+
     });
+    dispatch(uiStopLoading());
+
+    // dispatch(uiStartLoading());
+    // fetch(BASE_URL + "/alumnis")
+    // .then(res => res.json())
+    // .then(parsedRes => {
+    //   const alumnis = parsedRes;
+    //   let findAlumni = alumnis.find(al => {
+    //     return al.email.toLowerCase() === alumni.email.toLowerCase()
+    //   });
+    //   if (typeof findAlumni === 'undefined') {
+    //     fetch(BASE_URL + "/alumnis", {
+    //       method: "POST",
+    //       headers: {
+    //         'Accept': 'application/json',
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify(alumni)
+    //     })
+    //     .catch(err => {
+    //       console.log('addAlumni: ' + err);
+    //       dispatch(uiStopLoading());
+    //     })
+    //     .then(res => res.json())
+    //     .then(parsedRes => {
+    //       console.log('Error alumni: ' + parsedRes);
+    //     });
+    //   }
+    //   dispatch(uiStopLoading());
+    // })
+    // .catch(err => {
+    //   console.log('findAlumni: ' + err);
+    //   dispatch(uiStopLoading());
+    // });
   };
 };
 

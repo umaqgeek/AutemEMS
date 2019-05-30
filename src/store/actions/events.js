@@ -1,7 +1,7 @@
 import {
   SELECTED_EVENT,
   ADD_EVENT,
-  // REMOVE_EVENT,
+  REMOVE_EVENT,
   // UPDATE_EVENT,
   // REMOVE_ALL_EVENT,
   VIEW_EVENT
@@ -12,6 +12,8 @@ import {
   uiStartLoading,
   uiStopLoading
 } from './index';
+
+import { fetcher } from '../models';
 
 export const selectedEvent = (eventData) => {
   return {
@@ -27,17 +29,42 @@ export const addEvent = (eventData) => {
   // };
   return dispatch => {
     dispatch(uiStartLoading());
-    fetch(BASE_URL + '/events.json', {
-      method: 'POST',
-      body: JSON.stringify(eventData)
-    })
-    .then(res => res.json())
-    .then(parsedRes => {
+
+    fetcher('events.json', 'POST', eventData).then(parsedRes => {
       console.log(parsedRes);
       dispatch(uiStopLoading());
     })
     .catch(err => {
       console.log('addEvent: ' + err);
+      dispatch(uiStopLoading());
+    });
+
+  };
+};
+
+export const deleteEvent = (uuid) => {
+  return dispatch => {
+
+    dispatch(uiStartLoading());
+
+    fetcher('events.json').then(parsedRes => {
+
+      console.log('REMOVE 1');
+      console.log(parsedRes);
+      console.log('REMOVE 2');
+      
+      var event = parsedRes[uuid];
+      if (event) {
+
+        // parsedRes.splice
+
+        // dispatch(removeEvent(event.key));
+      }
+
+      dispatch(uiStopLoading());
+    })
+    .catch(err => {
+      console.log('viewRemoveEvent: ' + err);
       dispatch(uiStopLoading());
     });
   };
@@ -46,11 +73,11 @@ export const addEvent = (eventData) => {
 export const getEvent = () => {
   return dispatch => {
     dispatch(uiStartLoading());
-    fetch(BASE_URL + '/events.json')
-    .then(res => res.json())
-    .then(parsedRes => {
+
+    fetcher('events.json').then(parsedRes => {
       let eventsList = [];
       for (let key in parsedRes) {
+        parsedRes[key].uuid = key;
         eventsList.push(parsedRes[key]);
       }
       dispatch(uiStopLoading());
@@ -60,7 +87,15 @@ export const getEvent = () => {
       console.log('viewEvent: ' + err);
       dispatch(uiStopLoading());
     });
+
   };
+};
+
+export const removeEvent = (key) => {
+  return {
+    type: REMOVE_EVENT,
+    eventKey: key
+  }
 };
 
 export const viewEvent = (eventData) => {
